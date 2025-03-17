@@ -26,6 +26,7 @@ Employees
 | take 10 
 ```
 is the actual query you're supposed to run and running it, populates the table.
+
 ![image](https://github.com/user-attachments/assets/e5ec0751-71be-4a72-bfcd-87468d19f6d7)
 
 Once you get this table, you can answer the question and move on. 
@@ -53,6 +54,7 @@ Employees
 | where role == "IT Specialist"
 ```
 This did not work and I got an error:
+
 ![image](https://github.com/user-attachments/assets/3051633a-3125-4f63-98e8-8a857e1c3157)
 
 I didn't look up this error because I figured I'd try reversing the order of role and count first. 
@@ -63,6 +65,7 @@ Employees
 | count
 ```
 This worked, returning a result of 5. 
+
 ![image](https://github.com/user-attachments/assets/89e3fb12-b6bf-4955-b2f4-84ad6c255fd9)
 
 ## Question 4:
@@ -109,6 +112,7 @@ OutboundNetworkEvents
 Here, we're missing a key piece of information, Lois Lane's IP. 
 
 Running a `take 10` query on OutboundNetworkEvents, gives us the following table headers:
+
 ![image](https://github.com/user-attachments/assets/6385e2c2-16a0-4058-81ee-0f4925ba164a)
 
 None of these headers help us determine Lois Lane's IP address. But we know the database consists of 2 other tables, Email and Employees. It's unlikely that the Email table will give us the IP, so let's take a look at the Employee's table. 
@@ -116,6 +120,7 @@ None of these headers help us determine Lois Lane's IP address. But we know the 
 We can either run the `take 10` query again or just look at our [prior screenshot of the Employee table](https://github.com/user-attachments/assets/d132267a-8b4e-4bf3-b3ce-796035de3f98) to determine the table headers. 
 
 The Employees table lists both names and IP addresses, so we can query the table for Lois Lane's record. 
+
 ![image](https://github.com/user-attachments/assets/df8ff968-6873-4b41-94a2-e3997602a2f7)
 
 Now, we have Lois Lane's IP and we can run the query with her IP. 
@@ -125,7 +130,9 @@ OutboundNetworkEvents
 | where src_ip == "10.10.0.22"
 ```
 And we get a list of every website Lois Lane visited. 
+
 ![image](https://github.com/user-attachments/assets/f11a361b-600e-4fda-8043-ad1ed5f8bd8d)
+
 KC7 has made this easy, so every url is distinct. However, in reality people will visit multiple webpages/websites multiple times. So, how do we filter out duplicate website/webpage names?
 
 To answer that, I tried searching for "How to remove duplicate domain names using KQL" which didn't turn up many useful results, though I did find out that there is a [Kibana Query Language ](https://www.elastic.co/guide/en/kibana/current/kuery-query.html)which also uses the KQL acronym. 
@@ -133,7 +140,9 @@ To answer that, I tried searching for "How to remove duplicate domain names usin
 That's not what I was looking for, so I specified Kusto Query Language in the search. That search led me to a [stack overflow page ](https://stackoverflow.com/questions/78384416/how-to-remove-duplicates-in-kusto-query-language)about the [distinct operator.](https://learn.microsoft.com/en-us/kusto/query/distinct-operator?view=microsoft-fabric) This operator can be used to filter out duplicates of whatever is specified such as a column header. 
 
 Running that query gave me 5,139 records consisting of just urls. 
+
 ![image](https://github.com/user-attachments/assets/4c29422d-e082-4114-88c0-a74491dbdbed)
+
 There is no other identifying information in this table. Thankfully, I am not the only on who has had this question as running a search for "how to filter by distinct while still keeping all table headers kusto query" pulls up a [stack overflow page](https://stackoverflow.com/questions/67077241/obtaining-all-values-from-a-table-but-with-distinct-runid) with the exact same question. Unfortunately, the answer is that you must include all headers in your query. 
 
 But, if KC7's database had duplicate web addresses for Lois Lane, we could filter them out with this query:
