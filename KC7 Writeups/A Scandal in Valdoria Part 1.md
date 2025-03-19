@@ -3,7 +3,7 @@ Figure out how an unapproved news article got published to the front page of the
 
 Level: Beginner
 
-# Part 1 Writeup 
+# Part 1 
 
 This part, consisting of questins 1-11, is just an introduction to Kusto Query Language (KQL). Question 12 is just a "congrats you've reached the end of this part" question. 
 It's worth going through them if you've never used it before. I'm going through them since I've never used Kusto Query Language before. Since, this is a beginner module, all of the queries are given to you. As I went through the questions, I got sidetracked by what KQL could do instead of actually answering the questions. 
