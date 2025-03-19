@@ -5,7 +5,8 @@ Level: Beginner
 
 # Part 1 Writeup 
 
-This part, consisting of questins 1-10, is just an introduction to Kusto Query Language (KQL). It's worth going through them if you've never used it before. I'm going through them since I've never used Kusto Query Language before. Since, this is a beginner module, all of the queries are given to you. As I went through the questions, I got sidetracked by what KQL could do instead of actually answering the questions. 
+This part, consisting of questins 1-11, is just an introduction to Kusto Query Language (KQL). Question 12 is just a "congrats you've reached the end of this part" question. 
+It's worth going through them if you've never used it before. I'm going through them since I've never used Kusto Query Language before. Since, this is a beginner module, all of the queries are given to you. As I went through the questions, I got sidetracked by what KQL could do instead of actually answering the questions. 
 
 ## Question 1:
 Easy, read the setup and respond to the question to get started. Note: General responses aren't case sensitive.
@@ -154,6 +155,50 @@ OutboundNetworkEvents
 which would give us non-duplicate urls. In this case, running this query on KC7's database brings up the exact same list as before minus the rest of the columns. 
 
 ![image](https://github.com/user-attachments/assets/822f1125-7df6-477e-a029-2f22a3a6df2d)
+
+## Question 8:
+
+Again, follow the prompt and you get the answer. 
+
+However, it was around this question that I started wondering exactly how many tables were in this database, so I searched for "how to get a list of all tables in a database using kql". That gave me a[ documentation page ](https://learn.microsoft.com/en-us/kusto/management/show-tables-command?view=microsoft-fabric)about the `.show tables` command. 
+
+Running that gives us a nice little list of every table in the database. 
+
+![image](https://github.com/user-attachments/assets/fc1eeddc-4031-4a21-963d-19865c9437be)
+
+The SecurityAlerts table looks interesting doesn't it?
+
+Running 
+```
+SecurityAlerts
+| take 10
+```
+gives us this
+
+![image](https://github.com/user-attachments/assets/6435ad6b-ef4f-4b7b-9e48-a4c89e700979)
+
+I don't know about you, but that seems to be high number of people who have suspicious files on their devices, especially with the report of a suspicious email. This will probably be important later (when we proceed with the actual investigation), so we'll just make a note of it and move on to Question 9.
+
+## Question 9
+Distinct, which I learned about after finishing question 7, shows up in this one and running the given prompt only results in one IP. 
+
+## Question 10
+Tl'dr: Follow the prompt and you'll get the answer. 
+
+This is the question where I realized that I actually knew what `let mary_ips = ` meant without having to google "let statements in KQL"....of course I did that anyway, just to confirm that [these statements](https://learn.microsoft.com/en-us/kusto/query/let-statement?view=microsoft-fabric) are KQL's way of defining variables. 
+
+## Question 11 
+
+This question builds on question 10, allowing you to create and use your created variable in another statement. Again, follow the prompt. _However_, if you're like me, you might be tempted to leave off the () since none of the previous queries used them. KQL needs them and leaving them off will result in an error. 
+
+![image](https://github.com/user-attachments/assets/85190058-0fb4-4f13-a280-6ddfbf36d013)
+
+Here, I didn't know what to name the variable, so I just used the prompt default. 
+
+But, adding the () back in, will make the code run just fine and you'll get the answer.
+
+Then, answer question 12 (the answer is given in the prompt) and you can move on to Part 2, the actual investigation! 
+
 
 
 
