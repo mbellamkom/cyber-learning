@@ -14,7 +14,7 @@ A partner company sends Convoy Street Interactive a message about a high amount 
 
 Running an initial `.show tables` query gives us all of the tables in Convoy Street Interactive's system. 
 
-![All of the tables in the database](<https://github.com/mbellamkom/cyber-learning/blob/b0f85626582a651e8e716d76016c8aa4d8af30e5/KC7%201/assets/KC7%20Threat%20Hunting%20Workshop/show%20all%20tables.png>)
+![All of the tables in the database](<../assets/KC7 Threat Hunting Workshop/show all tables.png>)
 
 NetworkFlow and DeviceInfo aren't likely to be tables we need, so we can set those aside for now. Since, we're looking for traffic originating from `185.210.94.2`, we should look in the InboundNetworkEvents table. 
 
@@ -27,7 +27,7 @@ InboundNetworkEvents
 
 gives us the following fields
 
-![](<InboundNetworkEventsTake10.png>)
+![](<../assets/KC7 Threat Hunting Workshop/InboundNetworkEventsTake10.png>)
 
 Since we want to search by the IP address, we should use the `src_ip` field. 
 
@@ -40,7 +40,7 @@ InboundNetworkEvents
 
 we find that there are 24 records of the IP. 
 
-![](<Pasted image 20250720092843.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250720092843.png>)
 
 It looks like someone has been using this IP to search for Greasy Tender transaction logs, high value player accounts, and telemetry schema. Most of the searches are related to Greasy Tender, Convoy Street Interactive's in-game currency, or account credentials. With this, we can confirm that there was recon traffic on Convoy Street Interactive's end as well. 
 
@@ -55,7 +55,7 @@ AuthenticationEvents
 
 pulls up the following headers
 
-![](<KC7 1/assets/KC7 Threat Hunting Workshop/Pasted image 20250719125653.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250719125653.png>)
 
 `take 10` is a query that pulls up 10 random rows of a table. It's a good query to run when you're not sure what information a table contains or what the table headers are. 
 
@@ -69,7 +69,7 @@ AuthenticationEvents
 
 results in a blank table. 
 
-![](<Pasted image 20250720094740.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250720094740.png>)
 
 It doesn't look like they tried logging in with that IP address at all. That doesn't mean they don't have any usable credentials however, they just haven't tried to log in with them. Since the recon traffic relates to the company's in-game currency, however, we should keep looking. 
 
@@ -79,7 +79,7 @@ In our list of tables, there is a table called PassiveDNS. Passive DNS is a tech
 
 Running the `take 10` query gives us the following headers
 
-![](<Pasted image 20250720103500.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250720103500.png>)
 
 Interestingly, this table doesn't use `src_ip` like the other tables and uses `ip` instead. 
 
@@ -93,7 +93,7 @@ PassiveDns
 
 and pulls up 1 result. 
 
-![](<Pasted image 20250720104105.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250720104105.png>)
 
 In context of the searches done by the `185.210.94.2`, this domain looks suspicious. Let's run a search on the domain name and see if we get any other IPs.  Multiple IPs can point to a single domain. This is commonly used for larger domains such as google.com to balance server load. However, in this context, it could be a potential sign of distributed attacker infrastructure since this is inbound traffic. 
 
@@ -106,7 +106,7 @@ PassiveDns
 
 pulls up 2 other IPs associated with it. 
 
-![](<Pasted image 20250720105740.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250720105740.png>)
 
 Searching for those other IPs gives us 4 distinct domains. 
 
@@ -116,7 +116,7 @@ PassiveDns
 | where ip == "185.210.94.4" or ip == "185.210.94.4" or ip == "185.210.94.3"
 ```
 
-![](<KC7 1/assets/KC7 Threat Hunting Workshop/Pasted image 20250719131408.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250719131408.png>)
 
 Interestingly, one of those domains `.cn`  is a country-specific domain. 
 
@@ -149,7 +149,7 @@ or links contains "gamingtelemetryfinance.cn"
 
 It looks like 4 employees received emails containing at least one of these links. 
 
-![](<Pasted image 20250724111639.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250724111639.png>)
 
 Those 4 employees also received attachments, one of which was called `GreasyTender_Audit_Report.pdf`, which sounds like a file you'd expect to receive if you worked in finance. There was also another file sent to the employees called `GT_TelemetrySync.log`.
 
@@ -159,6 +159,6 @@ The next step is to check whether any more employees got those files. Running th
 Email
 | where attachments contains "GreasyTender_Audit_Report.pdf" or attachments contains "GT_TelemetrySync.log.pdf"
 ```
-![](<Pasted image 20250728144123.png>)
+![](<../assets/KC7 Threat Hunting Workshop/Pasted image 20250728144123.png>)
 Note that the email verdict here is clean. Since we suspect spearphishing, the emails are most likely not clean, so this is probably a false negative. The most likely explanation is that the email security system wasn't configured properly. It's also possible that the files themselves didn't contain anything executable, so they were marked as safe by the system. 
 
