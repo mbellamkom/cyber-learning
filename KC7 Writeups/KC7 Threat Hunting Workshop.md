@@ -14,7 +14,7 @@ A partner company sends Convoy Street Interactive a message about a high amount 
 
 Running an initial `.show tables` query gives us all of the tables in Convoy Street Interactive's system. 
 
-![image 1](<KC7 Writeups/KC7 Threat Hunting Workshop/Pasted image 20250720092229.png)
+[![image 1](<KC7 Writeups/KC7 Threat Hunting Workshop/Pasted image 20250720092229.png)](https://github.com/mbellamkom/cyber-learning/blob/9adf0a25de3d8cf5ce850bdf2e9561a42ae4b1e2/KC7%20Writeups/KC7%20Threat%20Hunting%20Workshop/show%20all%20tables.png)
 
 NetworkFlow and DeviceInfo aren't likely to be tables we need, so we can set those aside for now. Since, we're looking for traffic originating from `185.210.94.2`, we should look in the InboundNetworkEvents table. 
 
