@@ -14,7 +14,7 @@ A partner company sends Convoy Street Interactive a message about a high amount 
 
 Running an initial `.show tables` query gives us all of the tables in Convoy Street Interactive's system. 
 
-![image 1](<KC7 Writeups/KC7 Threat Hunting Workshop/Pasted image 20250720092229.png)
+![](<./assets/KC7 Threat Hunting Workshop/Pasted image 20250720092229.png>)
 
 NetworkFlow and DeviceInfo aren't likely to be tables we need, so we can set those aside for now. Since, we're looking for traffic originating from `185.210.94.2`, we should look in the InboundNetworkEvents table. 
 
@@ -161,4 +161,3 @@ Email
 ```
 ![](<./assets/KC7 Threat Hunting Workshop/Pasted image 20250728144123.png>)
 Note that the email verdict here is clean. Since we suspect spearphishing, the emails are most likely not clean, so this is probably a false negative. The most likely explanation is that the email security system wasn't configured properly. It's also possible that the files themselves didn't contain anything executable, so they were marked as safe by the system. 
-
