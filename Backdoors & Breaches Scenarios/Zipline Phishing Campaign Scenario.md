@@ -28,6 +28,6 @@ Along with MixShell, the script also deployed Responder, a tool used to poison B
 
 
 ## Resources
-Writeup  the scenario was based on - https://research.checkpoint.com/2025/zipline-phishing-campaign/
-TypeLib Hijacking - https://cicada-8.medium.com/hijack-the-typelib-new-com-persistence-technique-32ae1d284661
-Pass-the-Hash Attack - https://en.wikipedia.org/wiki/Pass_the_hash?oldformat=true
+- Writeup  the scenario was based on - https://research.checkpoint.com/2025/zipline-phishing-campaign/
+- TypeLib Hijacking - https://cicada-8.medium.com/hijack-the-typelib-new-com-persistence-technique-32ae1d284661
+- Pass-the-Hash Attack - https://en.wikipedia.org/wiki/Pass_the_hash?oldformat=true
