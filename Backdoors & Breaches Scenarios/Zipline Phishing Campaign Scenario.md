@@ -16,6 +16,8 @@ _Note: This current campaign used "AI Transformation" as a pretext, but attacker
 2. C2 & Exfil/Persistence - DNS as C2; Malicious Service  (Persistence)
 The powershell script the employee downloads, contains a malicious _lnk_ file which triggers a powershell loader that deploys _MixShell_ (powershell variant), which communicates with the attacker using DNS text record queries (sends data out as an exfil mechanism).
 
+_Note: MixShell is like a swiss army knife of attack commands that seems to be custom made by this threat actor. There's doesn't seem to be anything mentioned about it, aside from it being a shell used in Elixir (a programming language), before last month.  _
+
 This link initially pointed to a subdomain of _herokuapp.com_, a legitimate Platform-as-a-Service org that allows you to host web applications. However, any legitimate hosting site can most likely be used for this purpose. 
 
 TypeLib Hijacking that persists using explorer.exe as explorer is always trying to load some TypeLib libraries. 
