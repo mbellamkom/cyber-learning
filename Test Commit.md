@@ -1,1 +1,0 @@
-This is a test of a new obsidian vault plugin. Let's see if it works. 
