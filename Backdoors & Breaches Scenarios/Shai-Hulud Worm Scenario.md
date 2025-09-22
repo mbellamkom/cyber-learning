@@ -49,7 +49,7 @@ Investigation of Joseph's code base reveals that his npm token was used to authe
 
 
 # Resources
-Unit 42 writeup - https://unit42.paloaltonetworks.com/npm-supply-chain-attack/
-Aikido writeup - https://www.aikido.dev/blog/s1ngularity-nx-attackers-strike-again
-Voxel-kit - https://dl.acm.org/doi/10.1145/3706598.3713948
-Official Backdoors & Breaches rules - https://www.blackhillsinfosec.com/tools/backdoorsandbreaches/
+- Unit 42 writeup - https://unit42.paloaltonetworks.com/npm-supply-chain-attack/
+- Aikido writeup - https://www.aikido.dev/blog/s1ngularity-nx-attackers-strike-again
+- Voxel-kit - https://dl.acm.org/doi/10.1145/3706598.3713948
+- Official Backdoors & Breaches rules - https://www.blackhillsinfosec.com/tools/backdoorsandbreaches/
